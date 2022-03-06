@@ -1,0 +1,6 @@
+<h2>Discounts</h2>
+
+<p>Percentage Discount: <%= @discount.percentage_discount %></p>
+
+<p>With Quantity threshold: <%= @discount.quantity_threshold %></p>
+<%= link_to "Edit Discount", edit_merchant_bulk_discount_path(@merchant.id, @discount.id), method: :get, local: :true %>

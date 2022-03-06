@@ -1,9 +1,10 @@
-<center> 
+<center>
 <h1> Merchant Invoices Show Page </h1>
 
 <div class="total_revenue"
   <p>Total Revenue: <%=@invoice.invoice_revenue %></p>
 </div>
+<p>Total After Discount: <%= "$#{@applied_discount}" %></p>
 
 <div class="invoice_information">
   <p>Invoice Id: <%= @invoice.id %></p>

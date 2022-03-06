@@ -9,6 +9,7 @@ class Invoice < ApplicationRecord
   scope :with_successful_transactions, -> { joins(:transactions)
   .where("transactions.result =?", 0)}
 
+
   def customer_name
     customer = Customer.find(customer_id)
     customer.first_name + " " + customer.last_name
@@ -35,4 +36,14 @@ class Invoice < ApplicationRecord
                   .distinct
   end
 
+  def self.applied_discount(invoice_item)
+    applied_discount = 1
+    BulkDiscount.order(percentage_discount: :asc).each do |discount|
+
+      if invoice_item.quantity >= discount.quantity_threshold
+        applied_discount = discount.percentage_discount
+      end
+    end
+    ((1 - applied_discount) * (invoice_item.unit_price * invoice_item.quantity)).round(2)
+  end
 end

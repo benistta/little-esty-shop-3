@@ -118,5 +118,5 @@ RSpec.describe 'The Merchant Dashboard' do
       expect(page).to have_content(@katz.top_five_customers.first.transaction_count)
       expect(page).to have_content(@katz.top_five_customers.last.transaction_count)
     end
-  end
+end
 end

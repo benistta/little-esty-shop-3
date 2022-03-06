@@ -1,0 +1,8 @@
+<h1>Edit Bulk Discount #<%= @discount.id %></h1>
+<%=form_with model: @discount, url: merchant_bulk_discount_path(@discount.merchant.id, @discount.id) do |form| %>
+  <%= form.label :percentage_discount %>
+  <%= form.text_field :percentage_discount , value: @discount.percentage_discount %>
+  <%= form.label :quantity_threshold %>
+  <%= form.text_field :quantity_threshold, value: @discount.quantity_threshold  %>
+  <%= form.submit "Edit Discount" %>
+<% end %>

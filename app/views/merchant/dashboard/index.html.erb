@@ -2,6 +2,8 @@
 <header>
   <%= link_to "#{@merchant.name}'s items", merchant_items_path(@merchant.id), method: :get %>
   <%= link_to "#{@merchant.name}'s invoices", merchant_invoices_path(@merchant.id) %>
+  <%= link_to "##{@merchant.name}'s bulk discounts", merchant_bulk_discounts_path(@merchant.id), method: :get %>
+
 </header>
 
 <div id="stats">
