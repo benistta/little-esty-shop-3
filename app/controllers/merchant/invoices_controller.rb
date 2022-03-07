@@ -8,8 +8,8 @@ class Merchant::InvoicesController < ApplicationController
     find_invoice
     find_merchant
     @customer = @invoice.customer
-    @invoice_item = InvoiceItem.where(invoice_id: params[:id]).first
-    @applied_discount = Invoice.applied_discount(@invoice_item)
+    # @invoice_item = InvoiceItem.where(invoice_id: params[:id]).first
+    # @applied_discount = Invoice.applied_discount(@invoice_item)
   end
 
   def update

@@ -24,6 +24,10 @@ class Invoice < ApplicationRecord
     '%.2f' % (cents / 100.0)
   end
 
+  def total_revenue
+    invoice_items.sum("unit_price * quantity")
+  end
+
   def display_date
     self.created_at.strftime("%A, %B %d, %Y")
   end
@@ -36,14 +40,46 @@ class Invoice < ApplicationRecord
                   .distinct
   end
 
-  def self.applied_discount(invoice_item)
-    applied_discount = 1
-    BulkDiscount.order(percentage_discount: :asc).each do |discount|
+# def applied_discount
+#   total = 0
+#      discounts = item.merchant.bulk_discounts.where('bulk_discounts.quantity <= ?', quantity)
+#      if discounts.nil?
+#        unit_price * quantity
+#      else
+#        x = discounts.max_by do |discount|
+#          discount.discount
+#        end
+#        ((1 - (x.discount / 100)) * (unit_price * quantity)).round(2)
+#
+#
+#      end
+#      item.merchant.bulk_discounts.max_by do |discount|
+#        applied_discount = 0
+#        if quantity >= discount.quantity
+#          applied_discount = discount.discount
+#        else
+#          applied_discount = 0
+#        end
+#        total = ((1 - applied_discount) * (unit_price * quantity)).round(2)
+#      end
+#      total
 
-      if invoice_item.quantity >= discount.quantity_threshold
-        applied_discount = discount.percentage_discount
-      end
-    end
-    ((1 - applied_discount) * (invoice_item.unit_price * invoice_item.quantity)).round(2)
-  end
+
+
+
+
+
+
+  # def self.applied_discount(invoice_item)
+  #   applied_discount = 1
+  #   BulkDiscount.order(percentage_discount: :asc).each do |discount|
+  #
+  #     if invoice_item.quantity >= discount.quantity_threshold
+  #       applied_discount = discount.percentage_discount
+  #     end
+  #   end
+  #   ((1 - applied_discount) * (invoice_item.unit_price * invoice_item.quantity)).round(2)
+  #    # ((0.70) * (invoice_item.unit_price * invoice_item.quantity)).round(2)
+  #
+  # end
 end
