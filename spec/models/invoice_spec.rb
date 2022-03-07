@@ -146,20 +146,6 @@ RSpec.describe Invoice, type: :model do
       expect(Invoice.not_shipped).to eq([invoice1, invoice2])
       end
 
-  describe '' do
-      describe 'method' do
-        it 'subtotal' do
-          merchant = Merchant.create!(name: 'Ana Maria')
-          discount_1 = merchant.bulk_discounts.create!(percentage_discount: 0.20, quantity_threshold: 10)
-          discount_2 = merchant.bulk_discounts.create!(percentage_discount: 0.30, quantity_threshold: 15)
-          customer = Customer.create!(first_name: 'Juan ', last_name: 'Lopez')
-          item = merchant.items.create!(name: 'Pie', description: 'Food', unit_price: 17)
-          invoice = customer.invoices.create!(status: 0)
-          invoice_item = InvoiceItem.create!(quantity: 21, unit_price: 17, status: 0, invoice_id: invoice.id, item_id: item.id)
 
-        expect(Invoice.applied_discount(invoice_item)).to eq(249.9)
-        end
-      end
-    end
-  end
+end
 end

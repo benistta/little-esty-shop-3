@@ -46,7 +46,7 @@ RSpec.describe 'The Merchant Invoice Show Page' do
     end
     expect(page).to have_content ("Item Status Has Been Updated!")
   end
-
+end
 #   Merchant Invoice Show Page: Total Revenue and Discounted Revenue
 #
 # As a merchant
@@ -61,13 +61,38 @@ describe 'Discounted revenue' do
     discount_1 = merchant.bulk_discounts.create!(percentage_discount: 0.20, quantity_threshold: 10)
     discount_2 = merchant.bulk_discounts.create!(percentage_discount: 0.30, quantity_threshold: 15)
     customer = Customer.create!(first_name: 'Juan ', last_name: 'Lopez')
-    item = merchant.items.create!(name: 'Pie', description: 'Food', unit_price: 20)
+    item = merchant.items.create!(name: 'Pie', description: 'Food', unit_price: 11)
     invoice = customer.invoices.create!(status: 0)
-    invoice_item = InvoiceItem.create!(quantity: 21, unit_price: 17, status: 0, invoice_id: invoice.id, item_id: item.id)
+    invoice_item = InvoiceItem.create!(quantity: 23, unit_price: 11, status: 0, invoice_id: invoice.id, item_id: item.id)
 
     visit  merchant_invoice_path(merchant.id, invoice.id)
 
-    expect(page).to have_content('Total After Discount: $249.9')
+    # expect(page).to have_content('Total Revenue: $253')
+    expect(page).to have_content('Total After Discount: $177.10')
+  end
+
+  # Merchant Invoice Show Page: Link to applied discounts
+  #
+  # As a merchant
+  # When I visit my merchant invoice show page
+  # Next to each invoice item I see a link to the show page for the bulk discount that was applied (if any)
+
+  xit 'us 8' do
+    merchant = Merchant.create!(name: 'Ana Maria')
+
+    discount_1 = merchant.bulk_discounts.create!(discount: 0.20, quantity: 10)
+    discount_2 = merchant.bulk_discounts.create!(discount: 0.30, quantity: 15)
+
+    customer = Customer.create!(first_name: 'Juan ', last_name: 'Lopez')
+    item = merchant.items.create!(name: 'Pie', description: 'Food', unit_price: 11)
+    invoice = customer.invoices.create!(status: 0)
+    invoice_item = InvoiceItem.create!(quantity: 23, unit_price: 11, status: 0, invoice_id: invoice.id, item_id: item.id)
+
+    visit  merchant_invoice_path(merchant.id, invoice.id)
+
+    expect(page).to have_link('View Discount', count: 1)
+    click_on('View Discount')
+
+    expect(current_path).to eq("/merchant/#{merchant.id}/bulk_discounts/#{discount_2.id}")
   end
   end
-end
