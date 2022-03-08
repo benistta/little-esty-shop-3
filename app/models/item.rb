@@ -17,6 +17,10 @@ class Item < ApplicationRecord
     '%.2f' % (cents / 100.0)
   end
 
+  def invoice_display_price(quantity=0)
+    self.unit_price * quantity
+  end
+
   def item_best_day
     invoices.joins(:invoice_items, :transactions)
       .select("invoices.created_at AS date, sum(invoice_items.unit_price * invoice_items.quantity) AS total_item_sales")

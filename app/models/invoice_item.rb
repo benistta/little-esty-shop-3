@@ -8,12 +8,19 @@ class InvoiceItem < ApplicationRecord
     item.name
   end
 
+  def full_revenue
+    ((unit_price * quantity)/100).round
+  end
+
   def display_price
     cents = self.unit_price
     '%.2f' % (cents / 100.0)
   end
 
-  
+  # def view_discount
+  #   item.merchant.bulk_discounts.where("#{self.quantity_threshold} >= bulk_discounts.quantity").order(percentage_discount: :desc).first
+  # end
+
   def applied_discount
     price = item.unit_price
     item.merchant.bulk_discounts.order(percentage_discount: :desc, quantity_threshold: :desc).each do |discount|
@@ -26,10 +33,18 @@ class InvoiceItem < ApplicationRecord
     price
     end
 
+  # def applied_discount
+  #   price = item.unit_price
+  #   discount =  item.merchant.bulk_discounts.where("#{self.quantity} >= bulk_discounts.quantity").order(discount: :desc).first
+  #   if discount.nil?
+  #     quantity * unit_price
+  #   else
+  #     (1 - discount.percentage_discount) * (  quantity * unit_price)
+  #   end
+
     def self.discount_revenue
       all.map do |invoice_item|
-        invoice_item.quantity * invoice_item.applied_discount
+        (invoice_item.quantity * invoice_item.applied_discount)
       end.sum
-
     end
 end

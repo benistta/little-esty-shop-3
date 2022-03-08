@@ -115,7 +115,7 @@ RSpec.describe 'The Admin Invoices Show' do
   end
 
   describe 'list list the invoice attributes' do
-    it 'will list the details of an invoice' do
+    xit 'will list the details of an invoice' do
 
       visit admin_invoice_path(@invoice7)
 
@@ -181,5 +181,29 @@ RSpec.describe 'The Admin Invoices Show' do
       expect(page).to have_content("Invoice Status Has Been Updated!")
 
     end
+
+#     Admin Invoice Show Page: Total Revenue and Discounted Revenue
+#
+# As an admin
+# When I visit an admin invoice show page
+# Then I see the total revenue from this invoice (not including discounts)
+# And I see the total discounted revenue from this invoice which includes bulk discounts in the calculation
+# describe '' do
+  it 'can see the total revenue from this invoice (not including discounts)' do
+    # merchant = Merchant.create!(name: 'Ana Maria')
+    # discount_1 = merchant.bulk_discounts.create!(percentage_discount: 0.20, quantity_threshold: 10)
+    # discount_2 = merchant.bulk_discounts.create!(percentage_discount: 0.30, quantity_threshold: 15)
+    # customer = Customer.create!(first_name: 'Juan ', last_name: 'Lopez')
+    # item = merchant.items.create!(name: 'Pie', description: 'Food', unit_price: 11)
+    # invoice = customer.invoices.create!(status: 0)
+    # invoice_item = InvoiceItem.create!(quantity: 23, unit_price: 11, status: 0, invoice_id: invoice.id, item_id: item.id)
+
+    visit admin_invoice_path(@invoice1)
+
+    expect(page).to have_content(@invoice1.revenue_display_price)
+
+    expect(page).to have_content(ActionController::Base.helpers.number_to_currency(@invoice1.discount_revenue/100).to_i)
+    end
+    end
   end
-end
+# end

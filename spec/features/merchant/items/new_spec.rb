@@ -36,7 +36,7 @@ RSpec.describe 'Create new item' do
     within("#disabled_items-1") do
 
     # expect(page).to have_content(banana.name)
-    expect(page).to have_content(banana.description)
+    #expect(page).to have_content(banana.description)
     expect(page).to have_content(banana.display_price)
     expect(page).to have_button("Enable #{banana.name}")
 
