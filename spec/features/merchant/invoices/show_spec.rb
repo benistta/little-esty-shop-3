@@ -39,12 +39,7 @@ RSpec.describe 'The Merchant Invoice Show Page' do
     expect(page).to have_content ("Item Status Has Been Updated!")
   end
 end
-#   Merchant Invoice Show Page: Total Revenue and Discounted Revenue
-#
-# As a merchant
-# When I visit my merchant invoice show page
-# Then I see the total revenue for my merchant from this invoice (not including discounts)
-# And I see the total discounted revenue for my merchant from this invoice which includes bulk discounts in the calculation
+
 
 describe 'Discounted revenue' do
 
@@ -64,12 +59,6 @@ describe 'Discounted revenue' do
     expect(page).to have_content('Total After Discount: $177')
   end
 
-  # Merchant Invoice Show Page: Link to applied discounts
-  #
-  # As a merchant
-
-  # When I visit my merchant invoice show page
-  # Next to each invoice item I see a link to the show page for the bulk discount that was applied (if any)
 
   it 'can see a link to the show page for the bulk discount that was applied' do
     merchant = Merchant.create!(name: 'Ana Maria')

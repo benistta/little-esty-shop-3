@@ -8,11 +8,7 @@ class Merchant::InvoicesController < ApplicationController
     find_invoice
     find_merchant
     @customer = @invoice.customer
-    # require "pry"; binding.pry
     @merchant = Merchant.find(params[:merchant_id])
-    # @discount = BulkDiscount.find(params[:id])
-    # @invoice_item = InvoiceItem.where(invoice_id: params[:id]).first
-    # @applied_discount = Invoice.applied_discount(@invoice_item)
   end
 
   def update

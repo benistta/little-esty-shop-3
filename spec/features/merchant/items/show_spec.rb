@@ -1,15 +1,6 @@
 require 'rails_helper'
 
-# Merchant Items Show Page
-#
-# As a merchant,
-# When I click on the name of an item from the merchant items index page,
-# Then I am taken to that merchant's item's show page (/merchants/merchant_id/items/item_id)
-# And I see all of the item's attributes including:
-#
-# - Name
-# - Description
-# - Current Selling Price
+
 RSpec.describe 'Merchants Show page' do
   it 'can see all of the items attributes including description, name and price' do
     merchant_1 = Merchant.create!(name: "Ana Maria")

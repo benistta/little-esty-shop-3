@@ -1,16 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Bulk discounts index page' do
-  #     Merchant Bulk Discounts Index
-  #
-  # As a merchant
-  # When I visit my merchant dashboard
-  # Then I see a link to view all my discounts
-  # When I click this link
-  # Then I am taken to my bulk discounts index page
-  # Where I see all of my bulk discounts including their
-  # percentage discount and quantity thresholds
-  # And each bulk discount listed includes a link to its show page
+
   before :each do
     @merchant = Merchant.create!(name: "Ana Maria")
     @discount_1 = BulkDiscount.create!(percentage_discount: 0.5, quantity_threshold: 15, merchant_id: @merchant.id)
@@ -44,12 +35,6 @@ RSpec.describe 'Bulk discounts index page' do
       end
   end
 
-  #   As a merchant
-  # When I visit the discounts index page
-  # I see a section with a header of "Upcoming Holidays"
-  # In this section the name and date of the next 3 upcoming US holidays are listed.
-  #
-  # Use the Next Public Holidays Endpoint in the [Nager.Date API](https://date.nager.at/swagger/index.html
 
   it "displays next 3 upcoming holidays" do
      merchant = Merchant.create!(name: 'Ana Maria')

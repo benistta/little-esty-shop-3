@@ -145,7 +145,5 @@ RSpec.describe Invoice, type: :model do
 
       expect(Invoice.not_shipped).to eq([invoice1, invoice2])
       end
-
-
-end
+    end
 end

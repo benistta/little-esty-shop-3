@@ -9,14 +9,7 @@ RSpec.describe "bulk_discount destroy" do
     @discount_2 = BulkDiscount.create!(percentage_discount: 0.10, quantity_threshold: 30, merchant_id: @merchant.id)
     @discount_3 = BulkDiscount.create!(percentage_discount: 0.20, quantity_threshold: 40, merchant_id: @merchant.id)
   end
-#   Merchant Bulk Discount Delete
-#
-# As a merchant
-# When I visit my bulk discounts index
-# Then next to each bulk discount I see a link to delete it
-# When I click this link
-# Then I am redirected back to the bulk discounts index page
-# And I no longer see the discount listed
+
   describe "destroy" do
     it 'can see a link to delete a bulk discount' do
 

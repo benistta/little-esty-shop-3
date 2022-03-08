@@ -5,9 +5,11 @@
   <p>Total Revenue: <%= number_to_currency(@invoice.invoice_display_revenue) %></p>
 </div>
   <p>Total After Discount: <%= number_to_currency(@invoice.invoice_items.discount_revenue) %></p>
+
 <% if !@merchant.bulk_discounts.empty? %>
   <%= link_to "View Discount", merchant_bulk_discount_path(@merchant.id, @merchant.bulk_discounts.first.id)%>
 <% end %>
+
 <div class="invoice_information">
   <p>Invoice Id: <%= @invoice.id %></p>
   <p>Invoice Status: <%= @invoice.status %></p>
