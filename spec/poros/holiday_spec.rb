@@ -14,9 +14,7 @@ RSpec.describe Holiday do
   holiday = Holiday.new(data)
 
   expect(holiday).to be_a(Holiday)
-  # expect(holiday.name).to eq("Memorial Day")
   expect(holiday.name).to eq(data[:name])
-  # expect(holiday.date).to eq("2022-05-30")
   expect(holiday.date).to eq(data[:date])
  end
 end

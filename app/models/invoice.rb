@@ -19,6 +19,10 @@ class Invoice < ApplicationRecord
     (invoice_items.sum("invoice_items.unit_price * invoice_items.quantity"))/100
   end
 
+  def invoice_display_revenue
+    (invoice_items.sum("invoice_items.unit_price * invoice_items.quantity"))
+  end
+
   def revenue_display_price
     cents = (invoice_items.sum("invoice_items.unit_price * invoice_items.quantity"))
     '%.2f' % (cents / 100.0)
@@ -26,6 +30,18 @@ class Invoice < ApplicationRecord
 
   def total_revenue
     invoice_items.sum("unit_price * quantity")
+  end
+
+  # def discount_revenue
+  #   invoice_items.sum do |invoice_item|
+  #     invoice_item.applied_discount
+  #   end
+  # end
+
+  def discount_revenue
+    invoice_items.map do |invoice_item|
+      invoice_item.quantity * invoice_item.applied_discount
+    end.sum
   end
 
   def display_date
@@ -82,4 +98,6 @@ class Invoice < ApplicationRecord
   #    # ((0.70) * (invoice_item.unit_price * invoice_item.quantity)).round(2)
   #
   # end
+
+
 end

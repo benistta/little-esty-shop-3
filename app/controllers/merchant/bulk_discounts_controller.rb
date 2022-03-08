@@ -4,15 +4,17 @@ class Merchant::BulkDiscountsController < ApplicationController
 
     response = Faraday.new('https://date.nager.at/').get('api/v2/NextPublicHolidays/us')
     json = JSON.parse(response.body, symbolize_names: true)
-    
+
     @holidays = json[0..2].map do |data|
       Holiday.new(data)
     end
   end
 
   def show
+  
    @discount = BulkDiscount.find(params[:id])
    @merchant = Merchant.find(params[:merchant_id])
+   # @bulk_discount = BulkDiscount.find(params[:id])
   end
 
   def edit
