@@ -16,10 +16,10 @@ BulkDiscount.destroy_all
 # Customer.destroy_all
 #
 # @merchant = Merchant.create!(name: 'Ana Maria')
-BulkDiscount.create!(percentage_discount: 0.20, quantity_threshold: 10, merchant_id: 120)
-BulkDiscount.create!(percentage_discount: 0.30, quantity_threshold: 15, merchant_id: 120)
-BulkDiscount.create!(percentage_discount: 0.10, quantity_threshold: 20, merchant_id: 120)
-BulkDiscount.create!(percentage_discount: 0.50, quantity_threshold: 25, merchant_id: 120)
+BulkDiscount.create!(percentage_discount: 0.20, quantity_threshold: 10, merchant_id: 1)
+BulkDiscount.create!(percentage_discount: 0.30, quantity_threshold: 15, merchant_id: 1)
+BulkDiscount.create!(percentage_discount: 0.10, quantity_threshold: 20, merchant_id: 1)
+BulkDiscount.create!(percentage_discount: 0.50, quantity_threshold: 25, merchant_id: 1)
 # @customer = Customer.create!(first_name: 'Juan ', last_name: 'Lopez')
 # @item = @merchant.items.create!(name: 'Pie', description: 'Food', unit_price: 11.00)
 # @invoice = @customer.invoices.create!(status: 0)
